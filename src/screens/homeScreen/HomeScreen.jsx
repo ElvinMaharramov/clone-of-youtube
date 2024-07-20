@@ -51,13 +51,11 @@ const HomeScreen = () => {
                                 <Video video={video} key={video.id} />
                             </Col>
                         ))
-                        : [...Array(20).map(
-                            (_, index) => {
-                                <Col lg={3} md={4} key={index}>
-                                    <SkeletonVideo/>
-                                </Col>
-                            }
-                        )]
+                        : [...Array(20)].map((_, index) => (
+                            <Col lg={3} md={4} key={index}>
+                                <SkeletonVideo />
+                            </Col>
+                        ))
                     }
                 </Row>
             </InfiniteScroll>
