@@ -53,7 +53,7 @@ const WatchScreen = () => {
                 />
             </Col>
             <Col lg={4}>
-                {!loading ? videos?.filter(video => (video.snippet)).map(
+                {!relatedVideosLoading ? videos?.filter(video => (video.snippet)).map(
                     (video) => (
                         <VideoHorizontal
                             video={video}

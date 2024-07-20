@@ -12,7 +12,6 @@ import { AiFillEye } from 'react-icons/ai';
 
 import { Col, Row } from 'react-bootstrap';
 
-import YouTubeProfileİmage from '../../assets/img/YouTube-profile-image.png';
 import './videoHorizontal.scss';
 
 const VideoHorizontal = ({ video, searchScreen, subScreen }) => {

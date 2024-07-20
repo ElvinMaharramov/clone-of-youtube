@@ -1,5 +1,3 @@
-import { useDispatch } from "react-redux";
-
 import {
     CHANNEL_VIDEOS_FAIL,
     CHANNEL_VIDEOS_REQUEST,

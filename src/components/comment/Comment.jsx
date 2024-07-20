@@ -15,7 +15,7 @@ const Comment = ({comment}) => {
 
             <img
                 src={authorProfileImageUrl}
-                alt="YouTube Profile Image"
+                alt=""
                 className='rounded-circle mr-3'
             />
 

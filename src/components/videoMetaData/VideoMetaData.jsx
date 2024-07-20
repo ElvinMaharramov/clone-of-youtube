@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import './videoMetaData.scss';
 
-import YouTubeChannelImage from '../../assets/img/YouTube-profile-image.png';
-
 import { MdThumbUp, MdThumbDown } from 'react-icons/md';
 
 import moment from 'moment/moment';
@@ -61,7 +59,7 @@ const VideoMetaData = ({ video: { snippet, statistics }, videoId }) => {
                 <div className="d-flex">
                     <img
                         src={channelSnippet?.thumbnails?.default?.url}
-                        alt="YouTube Channel Image"
+                        alt=""
                         className='rounded-circle mr-3'
                     />
                     <div className="d-flex flex-column">
