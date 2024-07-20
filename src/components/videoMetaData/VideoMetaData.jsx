@@ -59,7 +59,7 @@ const VideoMetaData = ({ video: { snippet, statistics }, videoId }) => {
                 <div className="d-flex">
                     <img
                         src={channelSnippet?.thumbnails?.default?.url}
-                        alt=""
+                        alt="User"
                         className='rounded-circle mr-3'
                     />
                     <div className="d-flex flex-column">

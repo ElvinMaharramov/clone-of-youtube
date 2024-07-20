@@ -62,7 +62,7 @@ const Header = ({ handleToggleSideBar }) => {
         <MdApps size={22} />
         <img
           src={YouTubeProfileImage}
-          alt=""
+          alt="User"
           className='youtube-profile-image'
         />
       </div>

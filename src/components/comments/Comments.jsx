@@ -40,7 +40,7 @@ const Comments = ({ videoId, totalComments }) => {
 
         <img
           src={YouTubeProfileImage}
-          alt=""
+          alt="User"
           className='rounded-circle mr-3'
         />
 
