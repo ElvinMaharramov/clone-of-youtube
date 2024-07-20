@@ -1,0 +1,96 @@
+@import '../../base.scss';
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    background-color: $black-primary;
+    height: 10vh;
+    width: 100%;
+
+    position: fixed;
+    top: 0;
+
+    z-index: 999;
+
+    .header-menu {
+        display: none;
+    }
+
+    .header-youtube-logo {
+        width: 90px;
+        height: 30px;
+        object-fit: contain;
+        display: block;
+    }
+
+    form {
+        display: flex;
+        flex: 0.6;
+        padding: 0.1rem;
+        margin: 0.1rem;
+        border: 1.2px solid;
+        border-radius: 3px;
+        background-color: $black-secondary;
+
+        input{
+            width: 100%;
+            border: none;
+            font-weight: 500;
+            background: transparent;
+            padding: 0.3rem;
+            color: $text-color;
+
+            &:focus{
+                outline: none;
+            }
+        }
+
+        button{
+            padding: 0 1.25rem;
+            color: $text-color;
+            background: transparent;
+            border: none;
+
+            &:focus{
+                border: none;
+            }
+        }
+    }
+
+    .header-icons{
+        flex: 0.15;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        .youtube-profile-image{
+            border-radius: 50%;
+            width: 32px;
+            object-fit: contain;
+            // margin-left: 5px;
+        }
+    }
+}
+
+@media (max-width: $breakpoint-small){
+    .header{
+        padding: 1rem;
+
+        form{
+            flex: 1;
+        }
+        
+        .header-menu{
+            display: block;
+        }
+
+        .header-youtube-logo{
+            display: none;
+        }
+
+        .header-icons> * :not(.youtube-profile-image){
+            display: none;
+        }
+    }
+}

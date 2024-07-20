@@ -1,0 +1,54 @@
+@import '../../base.scss';
+
+.video-meta-data{
+
+    .video-meta-data-top{
+        cursor: pointer;
+    }
+
+    .video-meta-data-channel{
+        border-top: 0.2px solid $border-color;
+        border-bottom: 0.2px solid $border-color;
+        
+        img{
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        button{
+            background-color: red;
+            color: #FFFFFF;
+            border-radius: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+
+            &:hover{
+                color: FFFFFF;
+            }
+
+            &:focus{
+                border: none;
+                outline: none;
+            }
+
+            &.btn-gray{
+                background-color: gray;
+            }
+        }
+    }
+
+    .video-meta-data-description{
+        font-size: 0.9rem;
+        white-space: pre-line;
+        border-bottom: 0.2px solid $border-color;
+
+        .showMoreText{
+            text-decoration: none;
+            display: block;
+            margin: 1rem 0;
+            color: #FFFFFF;
+            font-weight: 500;
+        }
+    }
+}

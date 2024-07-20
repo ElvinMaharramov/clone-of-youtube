@@ -1,0 +1,99 @@
+@import '../../base.scss';
+@import '../../mixins.scss';
+
+.video-horizontal{
+    border-bottom: 0.3px solid $border-color;
+    cursor: pointer;
+
+    .video-horizontal-left{
+        position: relative;
+        text-align: center;
+    }
+
+    .video-horizontal-thumbnail{
+        width: 100%;
+
+        .video-horizontal-thumbnail-wrapper{
+            width: 100%;
+        }
+    }
+
+    .video-horizontal-thumbnail-channel{
+        width: 50%;
+        border-radius: 50%;
+    }
+
+    .video-duration{
+        position: absolute;
+        bottom: -0.1rem;
+        right: 0.7rem;
+
+        padding: 0.2rem;
+        background: #080808ec;
+        border-radius: 3px;
+    }
+
+    .video-horizontal-description{
+        @include line-clamp(2);
+    }
+
+    .video-horizontal-title{
+        font-size: 1rem;
+        letter-spacing: 0.1px;
+        color: #FFFFFF;
+
+        @include line-clamp(2);
+    }
+
+    .video-horizontal-details{
+        font-size: 0.9rem;
+    }
+
+    .video-horizontal-channel{
+        img{
+            width: 36px;
+            height: 36px;
+
+            border-radius: 50%;
+            margin-right: 0.5rem;
+            cursor: pointer;
+        }
+
+        p{
+            font-size: 0.9rem;
+            @include line-clamp(1);
+        }
+    }
+}
+
+@media(max-width: $breakpoint-small) {
+    .video-horizontal{
+        font-size: 12px;
+
+        .video-horizontal-title{
+            font-size: 1rem;
+            @include line-clamp(2)
+        }
+
+        .video-horizontal-description{
+            display: none;
+        }
+
+        .video-horizontal-details{
+            @include line-clamp(1)
+
+        }
+
+        .video-horizontal-channel{
+            margin: 0.1rem 0;
+
+            img{
+                display: none;
+            }
+
+            p{
+                font-size: 0.9rem;
+            }
+        }
+    }
+}

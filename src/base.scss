@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;&display=swap');
+
+$text-color: #b1bdb4;
+
+$black-primary: #16181b;
+$black-secondary: #121417;
+$border-color: #4c4c4c;
+$color-base: #404853;
+
+$breakpoint-medium: 1224px;
+$breakpoint-small: 520px;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+
+body {
+    background-color: $black-primary;
+    background-attachment: fixed;
+    color: $text-color;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 0.1px;
+}
+
+::-webkit-scrollbar{
+/* Bu, CSS pseudo-elementidir ve WebKit tarayıcı motorunu(Safari, Chrome, ve diğer WebKit tabanlı tarayıcılar)
+kullanan tarayıcılarda kaydırma çubuğunu(scrollbar) hedef almak için kullanılır.
+Bu pseudo-element, kaydırma çubuğunun stilini özelleştirmeye olanak tanır. */    
+    width: 0px;
+    /* Bu özellik, kaydırma çubuğunun genişliğini 0 piksel olarak ayarlar.
+    Genişliği 0 piksel olarak ayarlayarak, kaydırma çubuğunu tamamen gizler.
+    Kullanıcı, kaydırma çubuğunu göremez ve kullanamaz, ancak içerik hala kaydırılabilir olacaktır. */
+}

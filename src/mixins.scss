@@ -1,0 +1,20 @@
+@mixin line-clamp($number) {
+    overflow: hidden;
+    /* Elementin içeriği, belirlenen sınırları aştığında taşan kısmını gizler.
+    Bu, içeriğin yalnızca belirli bir kısmının görünmesini sağlar ve taşan metni görünmez yapar. */
+
+    display: -webkit-box;
+    /* Bu, bir elementin kutu modeli (box model) olarak davranmasını sağlar.
+    -webkit-box değeri, WebKit tarayıcı motorunu (Safari ve eski Chrome sürümleri) hedefler
+    ve flexbox'ın erken bir sürümü olan "block-box" veya "flexbox" modelini kullanır. */
+
+    -webkit-line-clamp: $number;
+    /* Bu özellik, elementin kaç satır metin göstereceğini belirtir. 1 değeri, yalnızca bir satır metnin
+    gösterileceği anlamına gelir. Ancak, -webkit-line-clamp tek başına çalışmaz; display: -webkit-box ve
+    -webkit-box-orient ile birlikte kullanılması gerekir. */
+
+    -webkit-box-orient: vertical;
+    /* Bu özellik, kutu modelinin yönünü dikey olarak ayarlar.
+    Yani, kutu içindeki öğeler dikey olarak yerleştirilir.
+    Bu, -webkit-line-clamp özelliği ile birlikte çalışarak metnin belirtilen satır sayısında kesilmesini sağlar. */
+}
