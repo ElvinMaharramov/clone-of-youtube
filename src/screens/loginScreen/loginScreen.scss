@@ -36,3 +36,9 @@
     }
 
 }
+
+@media (max-width: $breakpoint-small){
+    p{
+        text-align: center;
+    }
+}
