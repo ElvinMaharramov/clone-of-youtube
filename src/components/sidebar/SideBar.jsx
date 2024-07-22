@@ -76,7 +76,7 @@ const SideBar = ({ toggleSideBar, handleToggleSideBar }) => {
         </li>
       </NavLink>
 
-      <NavLink to='/liked-videos' className={getClassName}>
+      <NavLink to='/liked' className={getClassName}>
         <li>
           <MdThumbUp size={23} />
           <span>Liked videos</span>

@@ -1,22 +1,33 @@
 import {
+
     CHANNEL_VIDEOS_FAIL,
     CHANNEL_VIDEOS_REQUEST,
     CHANNEL_VIDEOS_SUCCESS,
+
     HOME_VIDEOS_FAIL,
     HOME_VIDEOS_REQUEST,
     HOME_VIDEOS_SUCCESS,
+
+    LIKED_VIDEOS_FAIL,
+    LIKED_VIDEOS_REQUEST,
+    LIKED_VIDEOS_SUCCESS,
+
     RELATED_VIDEOS_FAIL,
     RELATED_VIDEOS_REQUEST,
     RELATED_VIDEOS_SUCCESS,
+
     SEARCHED_VIDEOS_FAIL,
     SEARCHED_VIDEOS_REQUEST,
     SEARCHED_VIDEOS_SUCCESS,
+
     SELECTED_VIDEO_FAIL,
     SELECTED_VIDEO_REQUEST,
     SELECTED_VIDEO_SUCCESS,
+
     SUBSCRIPTIONS_CHANNEL_FAIL,
     SUBSCRIPTIONS_CHANNEL_REQUEST,
     SUBSCRIPTIONS_CHANNEL_SUCCESS
+
 } from "../actionType";
 
 export const homeVideosReducer = (state = {
@@ -227,6 +238,37 @@ export const channelVideosReducer = (state = {
             }
 
 
+        default:
+            return state;
+    }
+};
+
+export const likedVideosReducer = (state = {
+    loading: true,
+    videos: [],
+}, action) => {
+    
+    const { type, payload } = action;
+
+    switch (type) {
+        case LIKED_VIDEOS_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
+        case LIKED_VIDEOS_SUCCESS:
+            return {
+                ...state,
+                videos: [...state.videos, ...payload.videos],
+                loading: false,
+                nextPageToken: payload.nextPageToken,
+            };
+        case LIKED_VIDEOS_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: payload,
+            };
         default:
             return state;
     }

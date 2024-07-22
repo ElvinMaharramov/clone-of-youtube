@@ -1,7 +1,5 @@
 import React from 'react';
 
-// import YouTubeProfileImage from '../../assets/img/YouTube-profile-image.png';
-
 import moment from 'moment';
 
 import './comment.scss';

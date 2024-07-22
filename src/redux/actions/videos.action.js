@@ -1,22 +1,33 @@
 import {
+
     CHANNEL_VIDEOS_FAIL,
     CHANNEL_VIDEOS_REQUEST,
     CHANNEL_VIDEOS_SUCCESS,
+
     HOME_VIDEOS_FAIL,
     HOME_VIDEOS_REQUEST,
     HOME_VIDEOS_SUCCESS,
+
+    LIKED_VIDEOS_FAIL,
+    LIKED_VIDEOS_REQUEST,
+    LIKED_VIDEOS_SUCCESS,
+
     RELATED_VIDEOS_FAIL,
     RELATED_VIDEOS_REQUEST,
     RELATED_VIDEOS_SUCCESS,
+
     SEARCHED_VIDEOS_FAIL,
     SEARCHED_VIDEOS_REQUEST,
     SEARCHED_VIDEOS_SUCCESS,
+
     SELECTED_VIDEO_FAIL,
     SELECTED_VIDEO_REQUEST,
     SELECTED_VIDEO_SUCCESS,
+
     SUBSCRIPTIONS_CHANNEL_FAIL,
     SUBSCRIPTIONS_CHANNEL_REQUEST,
     SUBSCRIPTIONS_CHANNEL_SUCCESS
+
 } from "../actionType";
 import request from "../../api";
 
@@ -309,6 +320,41 @@ export const getVideosByChannel = (id) => async (dispatch) => {
         dispatch({
             type: CHANNEL_VIDEOS_FAIL,
             payload: error.response ? error.response.data : error.message,
+        });
+    }
+};
+
+export const getLikedVideos = () => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: LIKED_VIDEOS_REQUEST,
+        });
+
+        const { data } = await request('/videos', {
+            params: {
+                part: 'snippet, contentDetails, statistics',
+                myRating: 'like',
+                maxResults: 20,
+                // pageToken: getState().likedVideos.nextPageToken,
+            },
+            headers: {
+                Authorization: `Bearer ${getState().auth.accessToken}`,
+            },
+        });
+        console.log(data);
+
+        dispatch({
+            type: LIKED_VIDEOS_SUCCESS,
+            payload: {
+                videos: data.items,
+                nextPageToken: data.nextPageToken,
+            },
+        });
+    } catch (error) {
+        console.log(error.message);
+        dispatch({
+            type: LIKED_VIDEOS_FAIL,
+            payload: error.message,
         });
     }
 };

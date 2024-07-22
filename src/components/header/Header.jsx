@@ -59,7 +59,7 @@ const Header = ({ handleToggleSideBar }) => {
 
       <div className="header-icons">
         <MdNotifications size={28} />
-        <MdApps size={22} />
+        <MdApps size={22} className='google-apps' />
         <img
           src={YouTubeProfileImage}
           alt="User"

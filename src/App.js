@@ -14,6 +14,7 @@ import WatchScreen from './screens/watchScreen/WatchScreen';
 import SearchScreen from './screens/searchScreen/SearchScreen';
 import SubscriptionsScreen from './screens/subscriptionsScreen/SubscriptionsScreen';
 import ChannelScreen from './screens/channelScreen/ChannelScreen';
+import LikedVideosScreen from './screens/likedVideosScreen/LikedVideosScreen';
 
 import './app.scss';
 
@@ -168,6 +169,15 @@ const App = () => {
         element={
           <Layout>
             <ChannelScreen />
+          </Layout>
+        }
+      />
+
+      <Route
+        path='/liked'
+        element={
+          <Layout>
+            <LikedVideosScreen />
           </Layout>
         }
       />

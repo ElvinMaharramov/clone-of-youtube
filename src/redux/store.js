@@ -10,6 +10,7 @@ import { channelVideosReducer, homeVideosReducer, relatedVideosReducer, searched
 import { selectedVideoReducer } from './reducers/videos.reducers';
 import { channelDetailsReducer } from './reducers/channel.reducer';
 import { commentListReducer } from './reducers/comments.reducer';
+import { likedVideosReducer } from './reducers/videos.reducers';
 
 // const initialState = {
 //     name: 'Elvin',
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
     searchedVideos: searchedVideosReducer,
     subscriptionsChannel: subscriptionsChannelReducer,
     channelVideos: channelVideosReducer,
+    likedVideos: likedVideosReducer,
 })
 
 const store = createStore(
