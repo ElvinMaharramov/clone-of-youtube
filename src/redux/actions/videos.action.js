@@ -43,7 +43,7 @@ export const getPopularVideos = () => async (dispatch, getState) => {
                 part: 'snippet,contentDetails,statistics',
                 chart: 'mostPopular',
                 regionCode: 'US',
-                maxResults: 20,
+                maxResults: 40,
                 pageToken: getState().homeVideos.nextPageToken,
                 // key: process.env.REACT_APP_YOUTUBE_API_KEY,
             }
@@ -77,7 +77,7 @@ export const getVideosByCategory = (keyword) => async (dispatch, getState) => {
         const { data } = await request('/search', {
             params: {
                 part: 'snippet',
-                maxResults: 20,
+                maxResults: 40,
                 pageToken: getState().homeVideos.nextPageToken,
                 q: keyword,
                 type: 'video'
@@ -143,7 +143,7 @@ export const getRelatedVideos = (id) => async (dispatch) => {
                 part: 'snippet',
                 // relatedToVideoId: id,
                 // videoCategoryId: id,
-                maxResults: 15,
+                maxResults: 40,
                 type: 'video'
             }
         });
@@ -172,7 +172,7 @@ export const getVideosBySearch = (keyword) => async (dispatch) => {
         const { data } = await request('/search', {
             params: {
                 part: 'snippet',
-                maxResults: 20,
+                maxResults: 40,
                 q: keyword,
                 type: 'video, channel'
                 // key: process.env.REACT_APP_YOUTUBE_API_KEY,
@@ -300,7 +300,7 @@ export const getVideosByChannel = (id) => async (dispatch) => {
             params: {
                 part: 'snippet,contentDetails',
                 playlistId: uploadPlaylistId,
-                maxResults: 20,
+                maxResults: 40,
             },
         });
 
@@ -334,7 +334,7 @@ export const getLikedVideos = () => async (dispatch, getState) => {
             params: {
                 part: 'snippet, contentDetails, statistics',
                 myRating: 'like',
-                maxResults: 20,
+                maxResults: 40,
                 // pageToken: getState().likedVideos.nextPageToken,
             },
             headers: {
