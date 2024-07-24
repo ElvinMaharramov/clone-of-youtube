@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
@@ -16,7 +16,7 @@ import { AiOutlineSearch } from 'react-icons/ai';
 /* AiOutlineSearch: Ant Design ikon setinden "search" (arama) ikonunu içe aktarır.
 Bu ikon genellikle arama simgesi olarak kullanılır. */
 
-import { MdNotifications, MdApps, MdAccountCircle, MdVideoLibrary, MdBrightness4, MdSettings, MdHelpOutline, MdFeedback, MdBrightness7 } from 'react-icons/md';
+import { MdNotifications, MdApps, MdAccountCircle, MdVideoLibrary, MdBrightness4, MdSettings, MdHelpOutline, MdFeedback, MdBrightness7, MdPerson } from 'react-icons/md';
 /* MdNotifications: Material Design ikon setinden "notifications" (bildirimler) ikonunu içe aktarır.
 Bu ikon genellikle bildirim simgesi olarak kullanılır.
 MdApps: Material Design ikon setinden "apps" (uygulamalar) ikonunu içe aktarır.
@@ -30,7 +30,10 @@ const Header = ({ handleToggleSideBar }) => {
   const [input, setInput] = useState('');
   const [user, setUser] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(() => localStorage.getItem('darkMode') === 'true');
+
+
+  const menuRef = useRef(null);
+  const avatarRef = useRef(null);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -46,22 +49,19 @@ const Header = ({ handleToggleSideBar }) => {
     return () => unsubscribe();
   }, []);
 
-  // useEffect(() => {
-  //   document.body.className = darkMode ? 'dark-mode' : 'light-mode';
-  //   localStorage.setItem('darkMode', darkMode);
-  // }, [darkMode]);
 
   useEffect(() => {
-    const root = document.documentElement;
-    if (darkMode) {
-      root.classList.add('dark-mode');
-      root.classList.remove('light-mode');
-    } else {
-      root.classList.add('light-mode');
-      root.classList.remove('dark-mode');
-    }
-    localStorage.setItem('darkMode', darkMode);
-  }, [darkMode]);
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target) && !avatarRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -76,12 +76,24 @@ const Header = ({ handleToggleSideBar }) => {
     dispatch(logOut())
   };
 
-  const toggleDarkMode = () => {
-    setDarkMode((prev) => !prev);
+  const handleGoogleAccountClick = () => {
+    window.open('https://myaccount.google.com', '_blank');
   };
 
-  const handleGoogleAccountClick = () => {
-    window.location.href = 'https://myaccount.google.com';
+  const handleYouTubeStudioClick = () => {
+    window.open('https://studio.youtube.com/', '_blank')
+  };
+
+  const handleSettingsClick = () => {
+    window.open('https://www.youtube.com/account', '_blank')
+  };
+
+  const handleYouDataClick = () => {
+    window.open('https://myaccount.google.com/u/0/yourdata/youtube?hl=en', '_blank')
+  };
+
+  const handleHelpClick = () => {
+    window.open('https://support.google.com/youtube', '_blank')
   };
 
   return (
@@ -116,7 +128,7 @@ const Header = ({ handleToggleSideBar }) => {
         <MdNotifications size={28} />
         <MdApps size={22} className='google-apps' />
 
-        <div className="header-avatar-container" onClick={handleMenuToggle}>
+        <div className="header-avatar-container" ref={avatarRef} onClick={handleMenuToggle}>
           {user ? (
             <img src={user.photoURL} alt="Profile Avatar" className="youtube-profile-image" />
           ) : (
@@ -124,7 +136,7 @@ const Header = ({ handleToggleSideBar }) => {
           )}
 
           {menuOpen && (
-            <div className="profile-buttons">
+            <div className="profile-buttons" ref={menuRef}>
               <div className="avatar-info">
                 <img src={user ? user?.photoURL : YouTubeProfileImage} alt="Your Avatar" title='Avatar' />
                 <div className="about-user">
@@ -134,48 +146,25 @@ const Header = ({ handleToggleSideBar }) => {
               </div>
               <div className="horizontal-line"></div>
               <div className="profile-tabs">
-              <div className="profile-tab" onClick={handleGoogleAccountClick}>
+                <div className="profile-tab" onClick={handleGoogleAccountClick}>
                   <FaGoogle size={24} />
                   <p>Google Account</p>
                 </div>
-                <div className="profile-tab">
+                <div className="profile-tab" onClick={handleYouTubeStudioClick}>
                   <MdVideoLibrary size={24} />
                   <p>YouTube Studio</p>
                 </div>
 
-                {/* <div className="profile-tab" onClick={toggleDarkMode}>
-                  {darkMode ? (
-                    <>
-                      <MdBrightness7 size={24} />
-                      <p>Light Theme</p>
-                    </>
-                  ) : (
-                    <>
-                      <MdBrightness4 size={24} />
-                      <p>Dark Theme</p>
-                    </>
-                  )}
-                </div> */}
-
-                <div className="profile-tab" onClick={toggleDarkMode}>
-                  {darkMode ? (
-                    <>
-                      <MdBrightness7 size={24} />
-                      <p>Light Theme</p>
-                    </>
-                  ) : (
-                    <>
-                      <MdBrightness4 size={24} />
-                      <p>Dark Theme</p>
-                    </>
-                  )}
+                <div className="profile-tab" onClick={handleYouDataClick}>
+                  <MdPerson size={24} />
+                  <p>Your Data in YouTube</p>
                 </div>
 
-                <div className="profile-tab">
+                <div className="profile-tab" onClick={handleSettingsClick}>
                   <MdSettings size={24} />
                   <p>Settings</p>
                 </div>
-                <div className="profile-tab">
+                <div className="profile-tab" onClick={handleHelpClick}>
                   <MdHelpOutline size={24} />
                   <p>Help</p>
                 </div>

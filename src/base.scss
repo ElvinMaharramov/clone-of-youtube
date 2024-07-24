@@ -36,13 +36,3 @@ Bu pseudo-element, kaydırma çubuğunun stilini özelleştirmeye olanak tanır.
     Genişliği 0 piksel olarak ayarlayarak, kaydırma çubuğunu tamamen gizler.
     Kullanıcı, kaydırma çubuğunu göremez ve kullanamaz, ancak içerik hala kaydırılabilir olacaktır. */
 }
-
-body.dark-mode {
-    background-color: #181818;
-    color: #ffffff;
-}
-
-body.light-mode {
-    background-color: #ffffff;
-    color: #000000;
-}
