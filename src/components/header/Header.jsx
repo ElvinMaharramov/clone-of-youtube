@@ -61,7 +61,7 @@ const Header = ({ handleToggleSideBar }) => {
       if (menuRef.current && !menuRef.current.contains(event.target) && !avatarRef.current.contains(event.target)) {
         setMenuOpen(false);
       }
-      if (googleAppsRef.current && !googleAppsRef.current.contains(event.target)) {
+      if (googleAppsRef.current && !googleAppsRef.current.contains(event.target) && googleAppsMenuOpen) {
         setGoogleAppsMenuOpen(false);
       }
     };
@@ -70,7 +70,7 @@ const Header = ({ handleToggleSideBar }) => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [googleAppsMenuOpen]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -166,7 +166,7 @@ const Header = ({ handleToggleSideBar }) => {
         />
         {/* Google Apps Menu */}
         {googleAppsMenuOpen && user && (
-          <div className="google-apps-menu">
+          <div className="google-apps-menu" ref={googleAppsRef}>
 
             <div className="apps-menu-tabs">
               <img src={user ? user.photoURL : defaultAvatar} className="google-apps-profile-avatar" alt="User Avatar" />
