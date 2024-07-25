@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 
-import { logOut } from '../../redux/actions/auth.action';
+import { login, logOut } from '../../redux/actions/auth.action';
+import auth from '../../Firebase';
 
 import {
   MdSubscriptions,
@@ -12,7 +13,8 @@ import {
   MdHistory,
   MdLibraryBooks,
   MdHome,
-  MdSentimentDissatisfied
+  MdSentimentDissatisfied,
+  MdLogin
 } from 'react-icons/md';
 
 import './sidebar.scss';
@@ -53,8 +55,25 @@ const SideBar = ({ toggleSideBar, handleToggleSideBar }) => {
     dispatch(logOut())
   };
 
+  const handleLogin = () => {
+    dispatch(login())
+  };
+
   // Aktif bağlantıya stil eklemek için className fonksiyonu
   const getClassName = ({ isActive }) => (isActive ? 'active' : '');
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+    return () => unsubscribe();
+  }, []);
 
   return (
     <nav
@@ -107,10 +126,10 @@ const SideBar = ({ toggleSideBar, handleToggleSideBar }) => {
       <hr />
 
       <li
-        onClick={handleLogOut}
+        onClick={user ? handleLogOut: handleLogin}
       >
-        <MdExitToApp size={24} />
-        <span>Log out</span>
+        {user ? <MdExitToApp size={24} /> : <MdLogin size={24} />}
+        <span>{user ? 'Logout' : 'Login'}</span>
       </li>
 
       <hr />

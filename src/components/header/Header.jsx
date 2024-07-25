@@ -16,7 +16,7 @@ import { AiOutlineSearch } from 'react-icons/ai';
 /* AiOutlineSearch: Ant Design ikon setinden "search" (arama) ikonunu içe aktarır.
 Bu ikon genellikle arama simgesi olarak kullanılır. */
 
-import { MdNotifications, MdApps, MdAccountCircle, MdVideoLibrary, MdSettings, MdHelpOutline, MdFeedback, MdPerson } from 'react-icons/md';
+import { MdNotifications, MdApps, MdAccountCircle, MdVideoLibrary, MdSettings, MdHelpOutline, MdFeedback, MdPerson, MdLogin, MdExitToApp } from 'react-icons/md';
 /* MdNotifications: Material Design ikon setinden "notifications" (bildirimler) ikonunu içe aktarır.
 Bu ikon genellikle bildirim simgesi olarak kullanılır.
 MdApps: Material Design ikon setinden "apps" (uygulamalar) ikonunu içe aktarır.
@@ -55,22 +55,37 @@ const Header = ({ handleToggleSideBar }) => {
     return () => unsubscribe();
   }, []);
 
+  const handleClickOutside = (event) => {
+    if (menuRef.current && !menuRef.current.contains(event.target) && !avatarRef.current.contains(event.target)) {
+      setMenuOpen(false);
+    }
+  };
 
+  const handleAppsClickOutside = (event) => {
+    // if (googleAppsRef.current && !googleAppsRef.current.contains(event.target) && !googleAppsRef.current.contains(event.target)) {
+    //   setGoogleAppsMenuOpen(false);
+    // }
+    if (googleAppsRef.current && !googleAppsRef.current.contains(event.target)) {
+      setGoogleAppsMenuOpen(false);
+    }
+  };
+
+  // useEffect(() => {
+  //   document.addEventListener('mousedown', handleClickOutside);
+  //   document.addEventListener('mousedown', handleAppsClickOutside);
+  //   return () => {
+  //     document.removeEventListener('mousedown', handleClickOutside);
+  //     document.removeEventListener('mousedown', handleAppsClickOutside);
+  //   };
+  // }, []);
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target) && !avatarRef.current.contains(event.target)) {
-        setMenuOpen(false);
-      }
-      if (googleAppsRef.current && !googleAppsRef.current.contains(event.target) && googleAppsMenuOpen) {
-        setGoogleAppsMenuOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('click', handleClickOutside);
+    document.addEventListener('click', handleAppsClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('click', handleAppsClickOutside);
     };
-  }, [googleAppsMenuOpen]);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -116,9 +131,26 @@ const Header = ({ handleToggleSideBar }) => {
     window.open('https://support.google.com/youtube', '_blank')
   };
 
+  const handleAppsGoogleAccountClick = () => {
+    window.open('https://myaccount.google.com', '_blank')
+  };
+
   const handleYouTubeTvClick = () => {
     window.open('https://tv.youtube.com/', '_blank')
-  }
+  };
+
+
+  const handleYouTubeMusicClick = () => {
+    window.open('https://www.youtube.com/musicpremium', '_blank')
+  };
+
+  const handleYouTubeKidsClick = () => {
+    window.open('https://blog.youtube/news-and-events/youtube-kids/', '_blank')
+  };
+
+  const handleYouTubeCloneClick = () => {
+    window.open('https://project-by-elvinmaharramov.firebaseapp.com/', '_blank')
+  };
 
   const defaultAvatar = YouTubeProfileImage;
   const defaultUser = {
@@ -126,6 +158,8 @@ const Header = ({ handleToggleSideBar }) => {
     email: 'example@gmail.com',
     photoURL: YouTubeProfileImage,
   };
+
+  // console.log(googleAppsMenuOpen, 'googleAppsMenuOpen');
 
   return (
     <div className='header'>
@@ -156,19 +190,20 @@ const Header = ({ handleToggleSideBar }) => {
 
 
       <div className="header-icons">
-        <MdNotifications size={28} />
+        <MdNotifications size={29} style={{ cursor: 'pointer' }} />
         {/* <MdApps size={28} className='google-apps' /> */}
-        <MdApps
-          size={28}
-          className='google-apps'
-          onClick={handleGoogleAppsToggle}
-          ref={googleAppsRef}
-        />
+        <div className='google-apps-container' ref={googleAppsRef}>
+          <MdApps
+            size={33}
+            className='google-apps'
+            onClick={handleGoogleAppsToggle}
+          />
+        </div>
         {/* Google Apps Menu */}
         {googleAppsMenuOpen && user && (
-          <div className="google-apps-menu" ref={googleAppsRef}>
+          <div className="google-apps-menu">
 
-            <div className="apps-menu-tabs">
+            <div className="apps-menu-tabs" onClick={handleAppsGoogleAccountClick}>
               <img src={user ? user.photoURL : defaultAvatar} className="google-apps-profile-avatar" alt="User Avatar" />
               <p>{user ? user.displayName : defaultUser.displayName}</p>
             </div>
@@ -180,17 +215,17 @@ const Header = ({ handleToggleSideBar }) => {
               <p>YouTube TV</p>
             </div>
 
-            <div className="apps-menu-tabs">
+            <div className="apps-menu-tabs" onClick={handleYouTubeMusicClick}>
               <img src={YouTubeMusicIcon} className='youtube-music-icon' alt='YouTube Music İcon' />
               <p>YouTube Music</p>
             </div>
 
-            <div className="apps-menu-tabs">
+            <div className="apps-menu-tabs" onClick={handleYouTubeKidsClick}>
               <img src={YouTubeKidsIcon} className='youtube-kids-icon' alt='YouTube Kids İcon' />
               <p>YouTube Kids</p>
             </div>
 
-            <div className="apps-menu-tabs">
+            <div className="apps-menu-tabs" onClick={handleYouTubeCloneClick}>
               <img src={YouTubeLogo} className='second-line-youtube-icon' alt='YouTube İcon' />
               <p>YouTube Clone</p>
             </div>
@@ -207,7 +242,7 @@ const Header = ({ handleToggleSideBar }) => {
 
           {menuOpen && (
             <div className="profile-buttons" ref={menuRef}>
-              <div className="avatar-info">
+              <div className="avatar-info" onClick={handleGoogleAccountClick}>
                 <img src={user ? user?.photoURL : YouTubeProfileImage} alt="Your Avatar" title='Avatar' />
                 <div className="about-user">
                   <p>{user ? user.displayName : defaultUser.displayName}</p>
@@ -243,7 +278,7 @@ const Header = ({ handleToggleSideBar }) => {
                   <p>Send Feedback</p>
                 </div>
                 <div className="profile-tab" onClick={user ? handleLogOut : handleLogin}>
-                  <MdAccountCircle size={24} />
+                  {user ? <MdExitToApp size={24} /> : <MdLogin size={24} />}
                   <p>{user ? 'Logout' : 'Login'}</p>
                 </div>
               </div>

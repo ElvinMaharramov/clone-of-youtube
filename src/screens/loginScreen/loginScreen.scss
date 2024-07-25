@@ -1,13 +1,16 @@
 @import '../../base.scss';
 
-.login{
-    height: 100vh;
-    
+.login {
+    height: 80vh;
     display: grid;
     place-items: center;
+    align-items: center;
+    width: 50%;
+    justify-content: center;
+    margin: 0 auto;
 
-    .container{
-        background-color: $black-secondary;
+    .container {
+        // background-color: $black-secondary;
 
         padding: 2rem;
         margin: 0 1rem;
@@ -17,28 +20,82 @@
         flex-direction: column;
         align-items: center;
 
-        button{
-            padding: 0.5rem;
+        button {
+            // padding: 0.5rem;
+            // border: none;
+            // border-radius: 5px;
+            // margin-bottom: 1rem;
+            // background-color: red;
+            outline: none;
+            cursor: pointer;
             border: none;
-            border-radius: 5px;
-            margin-bottom: 1rem;
+            padding: 0.9rem 2rem;
+            margin: 0;
+            font-family: inherit;
+            font-size: inherit;
+            position: relative;
+            display: inline-block;
+            letter-spacing: 0.05rem;
+            font-weight: 700;
+            font-size: 17px;
+            border-radius: none;
+            overflow: hidden;
+            background: #FFFFFF;
+            color: ghostwhite;
 
-            &:focus{
-                outline: none;
+            &:hover span {
+                color: black;
+            }
+
+            &::before,
+            ::after {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 0;
+            }
+
+            &::before {
+                content: "";
+                background: rgb(40, 40, 40);
+                width: 120%;
+                left: -10%;
+                transform: skew(30deg);
+                transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+            }
+
+            &:hover::before{
+                transform: translate3d(100%, 0, 0);
+            }
+
+            span {
+                position: relative;
+                z-index: 10;
+                transition: color 0.4s;
             }
         }
-    }
 
-    .login-YouTube-logo{
-        width: 130px;
-        height: 130px;
-        object-fit: contain;
-    }
+        .author{
+            margin-top: 20px;
+            font-size: 1.2rem;
+        }
 
+        // &:focus {
+        //     outline: none;
+        // }
+    }
 }
 
-@media (max-width: $breakpoint-small){
-    p{
+.login-YouTube-logo {
+    width: 130px;
+    height: 130px;
+    object-fit: contain;
+}
+
+@media (max-width: $breakpoint-small) {
+    p {
         text-align: center;
     }
 }

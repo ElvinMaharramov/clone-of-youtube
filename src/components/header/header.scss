@@ -42,7 +42,7 @@
             background: transparent;
             padding: 0.3rem;
             color: $text-color;
-            
+
 
             &:focus {
                 outline: none;
@@ -68,6 +68,12 @@
         align-items: center;
         position: relative;
 
+        .google-apps {
+            cursor: pointer;
+        }
+
+        ;
+
         .google-apps-menu {
             position: absolute;
             top: -5px;
@@ -77,34 +83,54 @@
             background-color: rgb(40, 40, 40);
             color: #f1f1f1;
             border-radius: 20px;
-            width: 275px;
+            width: 300px;
 
-            .apps-menu-tabs{
+            .apps-menu-tabs {
                 display: flex;
                 align-items: center;
-                padding: 20px 16px 20px 16px;
+                padding: 15px 16px 15px 16px;
                 cursor: pointer;
                 transition: .2s;
 
-                &:first-child{
+                &:first-child {
+                    padding: 20px 16px;
                     padding-bottom: 18px;
+                    border-top-left-radius: 20px;
+                    border-top-right-radius: 20px;
+
+                    &:hover {
+                        background-color: rgb(40, 40, 40);
+                    }
+
+                    img {
+                        border-radius: 50%;
+                        width: 50px;
+                        height: 50px;
+                    }
+
+                    p {
+                        font-size: 1rem;
+                        font-weight: 600;
+                    }
+                }
+
+                &:last-child {
+                    border-bottom-left-radius: 20px;
+                    border-bottom-right-radius: 20px;
                 }
 
                 &:hover {
                     background-color: rgb(255 255 255 / 10%);
                 }
-                
-                img{
-                    width: 35px;
-                    height: 35px;
+
+                img {
+                    width: 40px;
+                    height: 40px;
                     object-fit: contain;
                     cursor: pointer;
-                    &:first-child{
-                        border-radius: 50%;
-                    }
                 }
 
-                p{
+                p {
                     margin: 0px;
                     margin-left: 15px;
                     font-size: 1.2rem;
@@ -144,13 +170,13 @@
                 padding: 10px 16px 10px 16px;
                 display: flex;
                 align-items: center;
+                cursor: pointer;
 
                 img {
                     width: 50px;
                     height: 50px;
                     border-radius: 50%;
                     object-fit: contain;
-                    cursor: pointer;
                     margin-right: 15px;
                     margin-top: 7px;
                 }
@@ -182,6 +208,11 @@
                     padding: 10px 16px 10px 16px;
                     cursor: pointer;
                     transition: .2s;
+
+                    &:last-child {
+                        border-bottom-left-radius: 20px;
+                        border-bottom-right-radius: 20px;
+                    }
 
                     &:hover {
                         background-color: rgb(255 255 255 / 10%);
