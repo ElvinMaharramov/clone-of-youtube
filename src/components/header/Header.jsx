@@ -169,29 +169,29 @@ const Header = ({ handleToggleSideBar }) => {
           <div className="google-apps-menu">
 
             <div className="apps-menu-tabs">
-              <img src={user ? user.photoURL : defaultAvatar} className="google-apps-profile-avatar" />
+              <img src={user ? user.photoURL : defaultAvatar} className="google-apps-profile-avatar" alt="User Avatar" />
               <p>{user ? user.displayName : defaultUser.displayName}</p>
             </div>
 
             <div className="apps-horizontal-line"></div>
 
             <div className="apps-menu-tabs" onClick={handleYouTubeTvClick}>
-              <img src={YouTubeTvIcon} className='youtube-tv-icon' />
+              <img src={YouTubeTvIcon} className='youtube-tv-icon' alt='YouTube TV İcon' />
               <p>YouTube TV</p>
             </div>
 
             <div className="apps-menu-tabs">
-              <img src={YouTubeMusicIcon} className='youtube-music-icon' />
+              <img src={YouTubeMusicIcon} className='youtube-music-icon' alt='YouTube Music İcon' />
               <p>YouTube Music</p>
             </div>
 
             <div className="apps-menu-tabs">
-              <img src={YouTubeKidsIcon} className='youtube-kids-icon' />
+              <img src={YouTubeKidsIcon} className='youtube-kids-icon' alt='YouTube Kids İcon' />
               <p>YouTube Kids</p>
             </div>
 
             <div className="apps-menu-tabs">
-              <img src={YouTubeLogo} className='second-line-youtube-icon' />
+              <img src={YouTubeLogo} className='second-line-youtube-icon' alt='YouTube İcon' />
               <p>YouTube Clone</p>
             </div>
 
