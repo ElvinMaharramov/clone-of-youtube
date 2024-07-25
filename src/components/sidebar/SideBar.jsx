@@ -64,42 +64,42 @@ const SideBar = ({ toggleSideBar, handleToggleSideBar }) => {
 
       <NavLink to='/' className={getClassName}>
         <li>
-          <MdHome size={23} />
+          <MdHome size={24} />
           <span>Home</span>
         </li>
       </NavLink>
 
       <NavLink to='/feed/subscriptions' className={getClassName}>
         <li>
-          <MdSubscriptions size={23} />
+          <MdSubscriptions size={24}  />
           <span>Subscriptions</span>
         </li>
       </NavLink>
 
       <NavLink to='/liked' className={getClassName}>
         <li>
-          <MdThumbUp size={23} />
+          <MdThumbUp size={24} />
           <span>Liked videos</span>
         </li>
       </NavLink>
 
       <NavLink to='/history' className={getClassName}>
         <li>
-          <MdHistory size={23} />
+          <MdHistory size={24} />
           <span>History</span>
         </li>
       </NavLink>
 
       <NavLink to='/library' className={getClassName}>
         <li>
-          <MdLibraryBooks size={23} />
+          <MdLibraryBooks size={24} />
           <span>Library</span>
         </li>
       </NavLink>
 
       <NavLink to='/feedback' className={getClassName}>
         <li>
-          <MdSentimentDissatisfied size={23} />
+          <MdSentimentDissatisfied size={24} />
           <span>Feedback</span>
         </li>
       </NavLink>
@@ -109,7 +109,7 @@ const SideBar = ({ toggleSideBar, handleToggleSideBar }) => {
       <li
         onClick={handleLogOut}
       >
-        <MdExitToApp size={23} />
+        <MdExitToApp size={24} />
         <span>Log out</span>
       </li>
 
