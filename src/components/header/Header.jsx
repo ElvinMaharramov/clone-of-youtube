@@ -16,7 +16,7 @@ import { AiOutlineSearch } from 'react-icons/ai';
 /* AiOutlineSearch: Ant Design ikon setinden "search" (arama) ikonunu içe aktarır.
 Bu ikon genellikle arama simgesi olarak kullanılır. */
 
-import { MdNotifications, MdApps, MdAccountCircle, MdVideoLibrary, MdSettings, MdHelpOutline, MdFeedback, MdPerson, MdLogin, MdExitToApp } from 'react-icons/md';
+import { MdNotifications, MdApps, MdVideoLibrary, MdSettings, MdHelpOutline, MdFeedback, MdPerson, MdLogin, MdExitToApp } from 'react-icons/md';
 /* MdNotifications: Material Design ikon setinden "notifications" (bildirimler) ikonunu içe aktarır.
 Bu ikon genellikle bildirim simgesi olarak kullanılır.
 MdApps: Material Design ikon setinden "apps" (uygulamalar) ikonunu içe aktarır.
