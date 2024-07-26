@@ -6,13 +6,12 @@
     align-items: center;
     padding: 1rem 3rem;
     background-color: $black-primary;
-    height: 10vh;
     width: 100%;
 
-    position: fixed;
+    position: sticky;
     top: 0;
 
-    z-index: 999;
+    z-index: 9999;
 
     .header-menu {
         display: none;
@@ -23,6 +22,7 @@
         height: 30px;
         object-fit: contain;
         display: block;
+        cursor: pointer;
     }
 
     form {
@@ -76,14 +76,18 @@
 
         .google-apps-menu {
             position: absolute;
-            top: -5px;
-            right: 125px;
+            top: 37px;
+            right: 77px;
             box-sizing: border-box;
             padding: 0px;
             background-color: rgb(40, 40, 40);
             color: #f1f1f1;
             border-radius: 20px;
             width: 300px;
+
+            @media (max-width: $breakpoint-small) {
+                display: none;
+            }
 
             .apps-menu-tabs {
                 display: flex;
@@ -159,12 +163,16 @@
 
         .profile-buttons {
             position: absolute;
-            top: -5px;
-            right: 70px;
+            top: 37px;
+            right: 8px;
             box-sizing: border-box;
             background-color: rgb(40, 40, 40);
             color: #f1f1f1;
             border-radius: 20px;
+
+            @media (max-width: $breakpoint-small) {
+                display: none;
+            }
 
             .avatar-info {
                 padding: 10px 16px 10px 16px;
@@ -237,11 +245,13 @@
 
         form {
             flex: 1;
+            margin-left: 0px;
         }
 
         .header-menu {
             display: block;
-            margin-right: 30px;
+            margin-right: 22px;
+            margin-left: 8px;
         }
 
         .header-youtube-logo {
@@ -259,5 +269,23 @@
         .google-apps {
             margin: 0px 10px;
         }
+    }
+}
+
+@media (max-width: $breakpoint-small) {
+    .google-apps-menu {
+        display: none;
+    }
+}
+
+@media (min-width: 521px) and (max-width: 1000px) {
+    .header .header-icons .google-apps-menu {
+        right: 42px;
+    }
+}
+
+@media (min-width: 521px) and (max-width: 1000px) {
+    .header .header-icons .profile-buttons {
+        right: -3px;
     }
 }

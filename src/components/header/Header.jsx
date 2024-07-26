@@ -174,6 +174,7 @@ const Header = ({ handleToggleSideBar }) => {
         src={YouTubeDarkLogo}
         alt="YouTube dark logo"
         className="header-youtube-logo"
+        onClick={handleYouTubeCloneClick}
       />
 
       <form onSubmit={handleSubmit}>

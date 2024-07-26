@@ -6,7 +6,7 @@
     flex-direction: column;
     width: 250px;
     height: 90vh;
-    padding-top: 2rem;
+    // padding-top: 2rem;
     transition: transform 0.2s ease-in;
 
     position: sticky;
@@ -81,5 +81,7 @@
         transform: translateX(-100%);
         position: fixed;
         z-index: 999;
+        width: 72px;
+        margin-top: 41px;
     }
 }
