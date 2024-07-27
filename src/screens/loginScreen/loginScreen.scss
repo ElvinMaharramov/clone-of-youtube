@@ -43,6 +43,14 @@
             background: #FFFFFF;
             color: ghostwhite;
 
+            @media (min-width:521px) and (max-width: 707px) {
+                padding: 0.3rem 1.5rem;
+            }
+
+            @media (max-width: 519px) {
+                padding: 0.2rem 0.5rem; 
+            }
+
             &:hover span {
                 color: black;
             }
@@ -79,7 +87,18 @@
 
         .author{
             margin-top: 20px;
-            font-size: 1.2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            text-align: center;
+
+            @media (min-width:520px) and (max-width: 673px) {
+                font-size: 0.8rem;
+            }
+
+            @media (max-width: 519px) {
+                font-size: 0.7rem;
+            }
         }
 
         // &:focus {

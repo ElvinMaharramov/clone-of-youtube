@@ -20,7 +20,7 @@ const FeedbackModal = ({ isOpen, onRequestClose, onSubmit }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+
         emailjs.send('service_6d8kf0c', 'template_ykrbdbd', formData, 'PA9fPVuleWiwfpe3h')
             .then((result) => {
                 console.log('Feedback submitted:', result.text);
@@ -66,7 +66,7 @@ const FeedbackModal = ({ isOpen, onRequestClose, onSubmit }) => {
                         <textarea name="feedback" value={formData.feedback} onChange={handleChange} placeholder="Feedback" className="input" required />
                     </div>
                 </div>
-                <button type="submit">Submit</button>
+                <button type="submit" className="btn">Send Feedback</button>
             </form>
         </Modal>
     );

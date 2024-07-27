@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import auth from '../../Firebase';
 import { login, logOut } from '../../redux/actions/auth.action';
+import FeedbackModal from '../feedbackModal/FeedbackModal';
 
 import './header.scss';
 
@@ -161,133 +162,151 @@ const Header = ({ handleToggleSideBar }) => {
 
   // console.log(googleAppsMenuOpen, 'googleAppsMenuOpen');
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
+  const handleFeedbackSubmit = (formData) => {
+    console.log('Feedback submitted:', formData);
+    // Form verilerini işleyin (örneğin, API'ye gönderin)
+  };
+
   return (
-    <div className='header'>
+    <>
+      <div className='header'>
 
-      <FaBars
-        className='header-menu'
-        size={26}
-        onClick={() => handleToggleSideBar()}
-      />
-
-      <img
-        src={YouTubeDarkLogo}
-        alt="YouTube dark logo"
-        className="header-youtube-logo"
-        onClick={handleYouTubeCloneClick}
-      />
-
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Search"
-          value={input}
-          onChange={e => setInput(e.target.value)}
+        <FaBars
+          className='header-menu'
+          size={26}
+          onClick={() => handleToggleSideBar()}
         />
-        <button type="submit">
-          <AiOutlineSearch size={22} />
-        </button>
-      </form>
 
+        <img
+          src={YouTubeDarkLogo}
+          alt="YouTube dark logo"
+          className="header-youtube-logo"
+          onClick={handleYouTubeCloneClick}
+        />
 
-      <div className="header-icons">
-        <MdNotifications size={29} style={{ cursor: 'pointer' }} />
-        {/* <MdApps size={28} className='google-apps' /> */}
-        <div className='google-apps-container' ref={googleAppsRef}>
-          <MdApps
-            size={33}
-            className='google-apps'
-            onClick={handleGoogleAppsToggle}
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Search"
+            value={input}
+            onChange={e => setInput(e.target.value)}
           />
-        </div>
-        {/* Google Apps Menu */}
-        {googleAppsMenuOpen && user && (
-          <div className="google-apps-menu">
+          <button type="submit">
+            <AiOutlineSearch size={22} />
+          </button>
+        </form>
 
-            <div className="apps-menu-tabs" onClick={handleAppsGoogleAccountClick}>
-              <img src={user ? user.photoURL : defaultAvatar} className="google-apps-profile-avatar" alt="User Avatar" />
-              <p>{user ? user.displayName : defaultUser.displayName}</p>
-            </div>
 
-            <div className="apps-horizontal-line"></div>
-
-            <div className="apps-menu-tabs" onClick={handleYouTubeTvClick}>
-              <img src={YouTubeTvIcon} className='youtube-tv-icon' alt='YouTube TV İcon' />
-              <p>YouTube TV</p>
-            </div>
-
-            <div className="apps-menu-tabs" onClick={handleYouTubeMusicClick}>
-              <img src={YouTubeMusicIcon} className='youtube-music-icon' alt='YouTube Music İcon' />
-              <p>YouTube Music</p>
-            </div>
-
-            <div className="apps-menu-tabs" onClick={handleYouTubeKidsClick}>
-              <img src={YouTubeKidsIcon} className='youtube-kids-icon' alt='YouTube Kids İcon' />
-              <p>YouTube Kids</p>
-            </div>
-
-            <div className="apps-menu-tabs" onClick={handleYouTubeCloneClick}>
-              <img src={YouTubeLogo} className='second-line-youtube-icon' alt='YouTube İcon' />
-              <p>YouTube Clone</p>
-            </div>
-
+        <div className="header-icons">
+          <MdNotifications size={29} style={{ cursor: 'pointer' }} />
+          {/* <MdApps size={28} className='google-apps' /> */}
+          <div className='google-apps-container' ref={googleAppsRef}>
+            <MdApps
+              size={33}
+              className='google-apps'
+              onClick={handleGoogleAppsToggle}
+            />
           </div>
-        )}
+          {/* Google Apps Menu */}
+          {googleAppsMenuOpen && user && (
+            <div className="google-apps-menu">
 
-        <div className="header-avatar-container" ref={avatarRef} onClick={handleMenuToggle}>
-          {user ? (
-            <img src={user.photoURL} alt="Profile Avatar" className="youtube-profile-image" />
-          ) : (
-            <img src={defaultAvatar} alt="Default Avatar" className="youtube-profile-image" />
-          )}
-
-          {menuOpen && (
-            <div className="profile-buttons" ref={menuRef}>
-              <div className="avatar-info" onClick={handleGoogleAccountClick}>
-                <img src={user ? user?.photoURL : YouTubeProfileImage} alt="Your Avatar" title='Avatar' />
-                <div className="about-user">
-                  <p>{user ? user.displayName : defaultUser.displayName}</p>
-                  <p>{user ? user.email : defaultUser.email}</p>
-                </div>
+              <div className="apps-menu-tabs" onClick={handleAppsGoogleAccountClick}>
+                <img src={user ? user.photoURL : defaultAvatar} className="google-apps-profile-avatar" alt="User Avatar" />
+                <p>{user ? user.displayName : defaultUser.displayName}</p>
               </div>
-              <div className="horizontal-line"></div>
-              <div className="profile-tabs">
-                <div className="profile-tab" onClick={handleGoogleAccountClick} style={user ? { display: 'flex' } : { display: 'none' }}>
-                  <FaGoogle size={24} />
-                  <p>Google Account</p>
-                </div>
-                <div className="profile-tab" onClick={handleYouTubeStudioClick} style={user ? { display: 'flex' } : { display: 'none' }}>
-                  <MdVideoLibrary size={24} />
-                  <p>YouTube Studio</p>
-                </div>
 
-                <div className="profile-tab" onClick={handleYouDataClick} style={user ? { display: 'flex' } : { display: 'none' }}>
-                  <MdPerson size={24} />
-                  <p>Your Data in YouTube</p>
-                </div>
+              <div className="apps-horizontal-line"></div>
 
-                <div className="profile-tab" onClick={handleSettingsClick}>
-                  <MdSettings size={24} />
-                  <p>Settings</p>
-                </div>
-                <div className="profile-tab" onClick={handleHelpClick}>
-                  <MdHelpOutline size={24} />
-                  <p>Help</p>
-                </div>
-                <div className="profile-tab">
-                  <MdFeedback size={24} />
-                  <p>Send Feedback</p>
-                </div>
-                <div className="profile-tab" onClick={user ? handleLogOut : handleLogin}>
-                  {user ? <MdExitToApp size={24} /> : <MdLogin size={24} />}
-                  <p>{user ? 'Logout' : 'Login'}</p>
-                </div>
+              <div className="apps-menu-tabs" onClick={handleYouTubeTvClick}>
+                <img src={YouTubeTvIcon} className='youtube-tv-icon' alt='YouTube TV İcon' />
+                <p>YouTube TV</p>
               </div>
+
+              <div className="apps-menu-tabs" onClick={handleYouTubeMusicClick}>
+                <img src={YouTubeMusicIcon} className='youtube-music-icon' alt='YouTube Music İcon' />
+                <p>YouTube Music</p>
+              </div>
+
+              <div className="apps-menu-tabs" onClick={handleYouTubeKidsClick}>
+                <img src={YouTubeKidsIcon} className='youtube-kids-icon' alt='YouTube Kids İcon' />
+                <p>YouTube Kids</p>
+              </div>
+
+              <div className="apps-menu-tabs" onClick={handleYouTubeCloneClick}>
+                <img src={YouTubeLogo} className='second-line-youtube-icon' alt='YouTube İcon' />
+                <p>YouTube Clone</p>
+              </div>
+
             </div>
           )}
+
+          <div className="header-avatar-container" ref={avatarRef} onClick={handleMenuToggle}>
+            {user ? (
+              <img src={user.photoURL} alt="Profile Avatar" className="youtube-profile-image" />
+            ) : (
+              <img src={defaultAvatar} alt="Default Avatar" className="youtube-profile-image" />
+            )}
+
+            {menuOpen && (
+              <div className="profile-buttons" ref={menuRef}>
+                <div className="avatar-info" onClick={handleGoogleAccountClick}>
+                  <img src={user ? user?.photoURL : YouTubeProfileImage} alt="Your Avatar" title='Avatar' />
+                  <div className="about-user">
+                    <p>{user ? user.displayName : defaultUser.displayName}</p>
+                    <p>{user ? user.email : defaultUser.email}</p>
+                  </div>
+                </div>
+                <div className="horizontal-line"></div>
+                <div className="profile-tabs">
+                  <div className="profile-tab" onClick={handleGoogleAccountClick} style={user ? { display: 'flex' } : { display: 'none' }}>
+                    <FaGoogle size={24} />
+                    <p>Google Account</p>
+                  </div>
+                  <div className="profile-tab" onClick={handleYouTubeStudioClick} style={user ? { display: 'flex' } : { display: 'none' }}>
+                    <MdVideoLibrary size={24} />
+                    <p>YouTube Studio</p>
+                  </div>
+
+                  <div className="profile-tab" onClick={handleYouDataClick} style={user ? { display: 'flex' } : { display: 'none' }}>
+                    <MdPerson size={24} />
+                    <p>Your Data in YouTube</p>
+                  </div>
+
+                  <div className="profile-tab" onClick={handleSettingsClick}>
+                    <MdSettings size={24} />
+                    <p>Settings</p>
+                  </div>
+                  <div className="profile-tab" onClick={handleHelpClick}>
+                    <MdHelpOutline size={24} />
+                    <p>Help</p>
+                  </div>
+                  <div className="profile-tab" onClick={openModal}>
+                    <MdFeedback size={24} />
+                    <p>Send Feedback</p>
+                  </div>
+                  <div className="profile-tab" onClick={user ? handleLogOut : handleLogin}>
+                    {user ? <MdExitToApp size={24} /> : <MdLogin size={24} />}
+                    <p>{user ? 'Logout' : 'Login'}</p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+      <FeedbackModal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        onSubmit={handleFeedbackSubmit}
+      />
+
+    </>
   )
 }
 

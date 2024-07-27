@@ -38,7 +38,7 @@ const LoginScreen = () => {
                     onClick={handleLogin}
                 ><span>Sign in with Google</span>
                 </button>
-                <p className='author'>This project is made using YouTube Data API by Elvin Maharramov</p>
+                <p className='author'>This project is made<br />using YouTube Data API<br />by Elvin Maharramov</p>
             </div>
         </div>
     )
