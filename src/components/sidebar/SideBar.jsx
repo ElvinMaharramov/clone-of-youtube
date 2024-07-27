@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 
 import { login, logOut } from '../../redux/actions/auth.action';
 import auth from '../../Firebase';
+import FeedbackModal from '../feedbackModal/FeedbackModal';
 
 import {
   MdSubscriptions,
@@ -75,66 +76,86 @@ const SideBar = ({ toggleSideBar, handleToggleSideBar }) => {
     return () => unsubscribe();
   }, []);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
+  const handleFeedbackSubmit = (formData) => {
+    console.log('Feedback submitted:', formData);
+    // Form verilerini işleyin (örneğin, API'ye gönderin)
+  };
+
   return (
-    <nav
-      className={toggleSideBar ? 'sidebar open' : 'sidebar'}
-      onClick={() => (handleToggleSideBar(false))}
-    >
-
-      <NavLink to='/' className={getClassName}>
-        <li>
-          <MdHome size={24} />
-          <span>Home</span>
-        </li>
-      </NavLink>
-
-      <NavLink to='/feed/subscriptions' className={getClassName}>
-        <li>
-          <MdSubscriptions size={24}  />
-          <span>Subscriptions</span>
-        </li>
-      </NavLink>
-
-      <NavLink to='/liked' className={getClassName}>
-        <li>
-          <MdThumbUp size={24} />
-          <span>Liked videos</span>
-        </li>
-      </NavLink>
-
-      <NavLink to='/history' className={getClassName}>
-        <li>
-          <MdHistory size={24} />
-          <span>History</span>
-        </li>
-      </NavLink>
-
-      <NavLink to='/library' className={getClassName}>
-        <li>
-          <MdLibraryBooks size={24} />
-          <span>Library</span>
-        </li>
-      </NavLink>
-
-      <NavLink to='/feedback' className={getClassName}>
-        <li>
-          <MdSentimentDissatisfied size={24} />
-          <span>Feedback</span>
-        </li>
-      </NavLink>
-
-      <hr />
-
-      <li
-        onClick={user ? handleLogOut: handleLogin}
+    <>
+      <nav
+        className={toggleSideBar ? 'sidebar open' : 'sidebar'}
+        onClick={() => (handleToggleSideBar(false))}
       >
-        {user ? <MdExitToApp size={24} /> : <MdLogin size={24} />}
-        <span>{user ? 'Logout' : 'Login'}</span>
-      </li>
 
-      <hr />
+        <NavLink to='/' className={getClassName}>
+          <li>
+            <MdHome size={24} />
+            <span>Home</span>
+          </li>
+        </NavLink>
 
-    </nav>
+        <NavLink to='/feed/subscriptions' className={getClassName}>
+          <li>
+            <MdSubscriptions size={24} />
+            <span>Subscriptions</span>
+          </li>
+        </NavLink>
+
+        <NavLink to='/liked' className={getClassName}>
+          <li>
+            <MdThumbUp size={24} />
+            <span>Liked videos</span>
+          </li>
+        </NavLink>
+
+        <NavLink to='/history' className={getClassName}>
+          <li>
+            <MdHistory size={24} />
+            <span>History</span>
+          </li>
+        </NavLink>
+
+        <NavLink to='/library' className={getClassName}>
+          <li>
+            <MdLibraryBooks size={24} />
+            <span>Library</span>
+          </li>
+        </NavLink>
+
+        <NavLink to='/feedback' className={getClassName} onClick={openModal}>
+          <li>
+            <MdSentimentDissatisfied size={24} />
+            <span>Feedback</span>
+          </li>
+        </NavLink>
+
+        <hr />
+
+        <li
+          onClick={user ? handleLogOut : handleLogin}
+        >
+          {user ? <MdExitToApp size={24} /> : <MdLogin size={24} />}
+          <span>{user ? 'Logout' : 'Login'}</span>
+        </li>
+
+        <hr />
+
+      </nav>
+
+      <FeedbackModal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        onSubmit={handleFeedbackSubmit}
+      />
+
+    </>
+
   )
 }
 

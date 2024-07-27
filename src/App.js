@@ -15,6 +15,7 @@ import SearchScreen from './screens/searchScreen/SearchScreen';
 import SubscriptionsScreen from './screens/subscriptionsScreen/SubscriptionsScreen';
 import ChannelScreen from './screens/channelScreen/ChannelScreen';
 import LikedVideosScreen from './screens/likedVideosScreen/LikedVideosScreen';
+import FeedbackModal from './components/feedbackModal/FeedbackModal';
 
 import './app.scss';
 
@@ -64,6 +65,16 @@ const Layout = ({ children }) => {
 }
 
 const App = () => {
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
+  const handleFeedbackSubmit = (formData) => {
+    console.log('Feedback submitted:', formData);
+    // Form verilerini işleyin (örneğin, API'ye gönderin)
+  };
 
   const navigate = useNavigate();
 
@@ -118,81 +129,99 @@ const App = () => {
     "component": Yerine "element" prop'u kullanılıyor.
     Yeni Özellikler: React Router v6, daha basit ve anlaşılır bir yapı sunuyor, bu da kodunuzu daha temiz ve
     yönetilebilir hale getiriyor. */
+    <>
+      <Routes>
+        <Route
+          path='/'
+          element={
+            <Layout>
+              <HomeScreen />
+            </Layout>
+          }
+        />
+        <Route
+          path='/auth'
+          element={
+            <Layout>
+              <LoginScreen />
+            </Layout>
+          }
+        />
 
-    <Routes>
-      <Route
-        path='/'
-        element={
-          <Layout>
-            <HomeScreen />
-          </Layout>
-        }
-      />
-      <Route
-        path='/auth'
-        element={
-          <Layout>
-            <LoginScreen />
-          </Layout>
-        }
-      />
+        <Route
+          path='/search/:query'
+          element={
+            <Layout>
+              <SearchScreen />
+            </Layout>
+          }
+        />
 
-      <Route
-        path='/search/:query'
-        element={
-          <Layout>
-            <SearchScreen />
-          </Layout>
-        }
-      />
+        <Route
+          path='/watch/:id'
+          element={
+            <Layout>
+              <WatchScreen />
+            </Layout>
+          }
+        />
 
-      <Route
-        path='/watch/:id'
-        element={
-          <Layout>
-            <WatchScreen />
-          </Layout>
-        }
-      />
+        <Route
+          path='/feed/subscriptions'
+          element={
+            <Layout>
+              <SubscriptionsScreen />
+            </Layout>
+          }
+        />
 
-      <Route
-        path='/feed/subscriptions'
-        element={
-          <Layout>
-            <SubscriptionsScreen />
-          </Layout>
-        }
-      />
+        <Route
+          path='/channel/:channelId'
+          element={
+            <Layout>
+              <ChannelScreen />
+            </Layout>
+          }
+        />
 
-      <Route
-        path='/channel/:channelId'
-        element={
-          <Layout>
-            <ChannelScreen />
-          </Layout>
-        }
-      />
+        <Route
+          path='/liked'
+          element={
+            <Layout>
+              <LikedVideosScreen />
+            </Layout>
+          }
+        />
 
-      <Route
-        path='/liked'
-        element={
-          <Layout>
-            <LikedVideosScreen />
-          </Layout>
-        }
-      />
+        <Route
+          path='/feedback'
+          element={
+            <Layout>
+              <FeedbackModal
+                isOpen={isModalOpen}
+                onRequestClose={closeModal}
+                onSubmit={handleFeedbackSubmit}
+              />
+            </Layout>
+          }
+        />
 
-      <Route
-        path='*'
-        /* path='*' rotası, yukarıdaki belirli rotalarla eşleşmeyen tüm URL'ler için NotFound bileşenini gösterir.
-        Bu, "catch-all" route olarak bilinir ve her zaman diğer rotalardan sonra gelmelidir. */
-        element={
-          <Layout>
-            <NotFound />
-          </Layout>
-        }
+        <Route
+          path='*'
+          /* path='*' rotası, yukarıdaki belirli rotalarla eşleşmeyen tüm URL'ler için NotFound bileşenini gösterir.
+          Bu, "catch-all" route olarak bilinir ve her zaman diğer rotalardan sonra gelmelidir. */
+          element={
+            <Layout>
+              <NotFound />
+            </Layout>
+          }
+        />
+      </Routes>
+      <FeedbackModal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
       />
-    </Routes>
+    </>
   )
 }
 

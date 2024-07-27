@@ -11,8 +11,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import './base.scss';
 
+import Modal from 'react-modal';
+Modal.setAppElement('#root');
+
 // Yeni root oluşturma ve render etme işlemi
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 
 root.render(
     <Provider store={store}>
