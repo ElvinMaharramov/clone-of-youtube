@@ -30,7 +30,7 @@ const Video = ({ video, channelScreen }) => {
   const [duration, setDuration] = useState(null);
   const [channelIcon, setChannelIcon] = useState(null);
 
-  const seconds = moment.duration(duration).asSeconds();
+  // const seconds = moment.duration(duration).asSeconds();
   // const _duration = moment.utc(seconds * 1000).format('mm.ss');
 
   const videoId = id?.videoId || contentDetails?.videoId || id;
