@@ -12,6 +12,7 @@ import SkeletonVideo from '../../components/skeletons/SkeletonVideo';
 import { getPopularVideos, getVideosByCategory } from '../../redux/actions/videos.action';
 
 import { Col, Container, Row } from 'react-bootstrap';
+
 const HomeScreen = () => {
 
     const dispatch = useDispatch();
@@ -31,7 +32,7 @@ const HomeScreen = () => {
     }
 
     return (
-        <Container>
+        <Container className='container'>
 
             <CategoriesBar />
             <InfiniteScroll
@@ -40,7 +41,6 @@ const HomeScreen = () => {
                 hasMore={true}
                 loader={
                     <div className='spinner-border text-danger d-block mx-auto'>
-
                     </div>
                 }
             >

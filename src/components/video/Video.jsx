@@ -69,6 +69,17 @@ const Video = ({ video, channelScreen }) => {
     navigate(`/watch/${videoId}`)
   };
 
+  const formatDuration = (duration) => {
+    const durationInSeconds = moment.duration(duration).asSeconds();
+    const hours = Math.floor(durationInSeconds / 3600);
+    const minutes = Math.floor((durationInSeconds % 3600) / 60);
+    const seconds = durationInSeconds % 60;
+
+    return hours > 0 
+      ? `${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
+      : `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  };
+
 
   return (
 
@@ -77,7 +88,7 @@ const Video = ({ video, channelScreen }) => {
       <div className="video-top">
         {/* <img src={medium?.url} alt="Video thumbnail" /> */}
         <LazyLoadImage src={medium?.url} effect='blur' />
-        <span className='video-duration'>{_duration}</span>
+        <span className='video-duration'>{formatDuration(duration)}</span>
       </div>
 
       <div className="video-title">

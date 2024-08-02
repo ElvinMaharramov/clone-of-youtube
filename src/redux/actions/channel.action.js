@@ -6,14 +6,16 @@ import {
     CHANNEL_SUBSCRIPTION_STATUS,
 } from "../actionType";
 
+// Kanalın məlumatlarını əldə etmək üçün istifadə olunan funksiya.
 export const getChannelDetails = (id) => async (dispatch) => {
     try {
         dispatch({
+            //Dipatch Redux metodudur, actionları göndərir.
             type: CHANNEL_DETAILS_REQUEST,
         })
 
         const { data } = await request('/channels', {
-            params: {
+            params: {//API üçün göndərilən parametrlər.
                 part: 'snippet, statistics, contentDetails',
                 id,
             }
@@ -34,6 +36,7 @@ export const getChannelDetails = (id) => async (dispatch) => {
     }
 }
 
+// Kanal abunəliyinin statusunu yoxlamaq üçün funksiya.
 export const checkSubscriptionStatus = (id) => async (dispatch, getState) => {
     try {
 
@@ -44,7 +47,7 @@ export const checkSubscriptionStatus = (id) => async (dispatch, getState) => {
                 mine: true,
             },
 
-            headers: {
+            headers: {//API çağrısına əlavə olunan başlıqlar, istifadəçinin girişi üçün accessToken istifadə edir.
                 Authorization: `Bearer ${getState().auth.accessToken}`,
             },
 
