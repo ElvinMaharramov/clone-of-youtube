@@ -8,6 +8,10 @@ import { login } from '../../redux/actions/auth.action';
 import YouTubeLogo from '../../assets/img/YouTube logo.png';
 import './loginScreen.scss';
 
+const handleLinkedInAccountClick = () => {
+    window.open('https://www.linkedin.com/in/maharramovelvin/', '_blank');
+};
+
 const LoginScreen = () => {
 
     const dispatch = useDispatch();
@@ -38,7 +42,9 @@ const LoginScreen = () => {
                     onClick={handleLogin}
                 ><span>Sign in with Google</span>
                 </button>
-                <p className='author'>This project is made<br />using YouTube Data API<br />by Elvin Maharramov</p>
+                <p
+                className='author'
+                onClick={handleLinkedInAccountClick}>This project is made<br />using YouTube Data API<br />by <span className='author-name'>Elvin Maharramov</span></p>
             </div>
         </div>
     )

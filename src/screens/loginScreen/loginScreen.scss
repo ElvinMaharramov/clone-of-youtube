@@ -89,8 +89,14 @@
             margin-top: 20px;
             font-size: 1rem;
             font-weight: 600;
-            display: flex;
+            // display: flex;
             text-align: center;
+
+            .author-name{
+                color: #5687C9;
+                text-decoration: underline;
+                cursor: pointer;
+            }
 
             @media (min-width:520px) and (max-width: 673px) {
                 font-size: 0.8rem;
