@@ -1,21 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-
 import moment from 'moment';
 import numeral from 'numeral';
-
 import request from '../../api';
-
 import { AiFillEye } from 'react-icons/ai';
-
 import { Col, Row } from 'react-bootstrap';
-
 import './videoHorizontal.scss';
 
-const VideoHorizontal = ({ video, searchScreen, subScreen }) => {
+// Format duration to hh:mm:ss or mm:ss
+const formatDuration = (duration) => {
+  if (!duration) return 'N/A';
+  
+  const durationInSeconds = moment.duration(duration).asSeconds();
+  const hours = Math.floor(durationInSeconds / 3600);
+  const minutes = Math.floor((durationInSeconds % 3600) / 60);
+  const seconds = durationInSeconds % 60;
 
+  return hours > 0 
+    ? `${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
+    : `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+};
+
+const VideoHorizontal = ({ video, searchScreen, subScreen }) => {
   const {
     id,
     snippet: {
@@ -48,8 +55,8 @@ const VideoHorizontal = ({ video, searchScreen, subScreen }) => {
 
     if (isVideo) {
       getVideoDetails();
-    };
-  }, [id, isVideo])
+    }
+  }, [id, isVideo]);
 
   useEffect(() => {
     const get_channel_icon = async () => {
@@ -59,7 +66,6 @@ const VideoHorizontal = ({ video, searchScreen, subScreen }) => {
           id: channelId,
         }
       });
-      // setChannelIcon(items[0].snippet.thumbnails.medium.url);
       if (items && items.length > 0) {
         setChannelIcon(items[0].snippet.thumbnails.medium.url);
       }
@@ -67,11 +73,7 @@ const VideoHorizontal = ({ video, searchScreen, subScreen }) => {
     get_channel_icon();
   }, [channelId]);
 
-  const seconds = moment.duration(duration).asSeconds();
-  const _duration = moment.utc(seconds * 1000).format('mm.ss');
-
   const navigate = useNavigate();
-
   const _channelId = resourceId?.channelId || channelId;
 
   const handleClick = () => {
@@ -96,10 +98,11 @@ const VideoHorizontal = ({ video, searchScreen, subScreen }) => {
           wrapperClassName='video-horizontal-thumbnail-wrapper'
         />
 
-        {
-          isVideo &&
-          <span className='video-duration'>{_duration}</span>
-        }
+        {isVideo && (
+          <span className='video-duration'>
+            {formatDuration(duration)}
+          </span>
+        )}
 
       </Col>
 
@@ -113,26 +116,27 @@ const VideoHorizontal = ({ video, searchScreen, subScreen }) => {
           {title}
         </p>
 
-        {isVideo &&
+        {isVideo && (
           <div className="video-horizontal-details">
             <AiFillEye />
             {numeral(views).format('0.a')} Views •
             {moment(publishedAt).fromNow()}
           </div>
-        }
+        )}
 
-        {(searchScreen || subScreen) && <p
-          className='mt-1 video-horizontal-description'
-        >
-          {description}
-        </p>
-        }
+        {(searchScreen || subScreen) && (
+          <p className='mt-1 video-horizontal-description'>
+            {description}
+          </p>
+        )}
 
         <div className="video-horizontal-channel d-flex align-items-center my-1">
-          {isVideo && channelIcon && <LazyLoadImage
-            src={channelIcon}
-            effect='blur'
-          />}
+          {isVideo && channelIcon && (
+            <LazyLoadImage
+              src={channelIcon}
+              effect='blur'
+            />
+          )}
           <p className='mb-0'>{channelTitle}</p>
         </div>
         {subScreen && (
@@ -142,7 +146,7 @@ const VideoHorizontal = ({ video, searchScreen, subScreen }) => {
         )}
       </Col>
     </Row>
-  )
+  );
 }
 
 export default VideoHorizontal;
